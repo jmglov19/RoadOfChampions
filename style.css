@@ -1,0 +1,31 @@
+h1{
+    text-align: center;
+}
+
+body{
+    text-align: center;
+    font-size: 20px;
+}
+
+progress{
+    width: 700px;
+    height: 100px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+button {
+    background-color: #864113;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    
+  }
