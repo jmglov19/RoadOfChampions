@@ -1,0 +1,10 @@
+#enemyStats {
+    width: 40%; /* Whichever width you want */
+    margin-left: 60%; /* Minus the amount to make it 100% */
+    text-align: center;
+}
+#enemyStatsTitle{
+    width: 40%; /* Whichever width you want */
+    margin-left: 60%; /* Minus the amount to make it 100% */
+    text-align: center;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>JS Test</title>
+    <script src="main.js"></script>
+    <script src="Enemy.js"></script>
+    <script src="Armor.js"></script>
+    <script src="Weapon.js"></script>
+    <script src="User.js"></script>
+</head>
+
+<body>
+    <div class="content-wrapper">
+        <h1 id="heading">Test document for JS testing</h1>
+        
+        <p id = userstats>User Stats</p>
+
+
+            <button type="button" onclick="showAlert()">Show Alert</button>
+            <button type="button" onclick="newEnemy()">New Enemy</button>
+            <button type="button" onclick="createUser()"> Create User</button>
+            <button type="button" onclick="useLargePotion()"> Large Potion</button>
+            <button type="button" onclick="useSmallPotion()"> Small Potion</button>
+            <button type="button" onclick="takeDamage()">Take Damage</button>
+            <button type="button" onclick="switchWeapons()">Switch Weapon</button>
+            <button type="button" onclick="attack()">Attack</button>
+            <button type="button" onclick="newWeapon()">New Weapon</button>
+    </div>
+</body>
+
+<table style="float: left">
+    <tr>
+        <th>Item</th>
+        <th>Armor</th>
+    </tr>
+    <tr>
+        <td id = helmet>Helmet</td> 
+        <th id = helArm> 0 </th>      
+    </tr>
+    <tr>
+        <td id = chestplate>ChestPlate</td>
+        <th id = chestArm> 0 </th>
+    </tr>
+
+    <tr>
+        <td id = leggings>Leggings</td>
+        <th id = legArm> 0 </th>
+    </tr>
+    <tr>
+        <td id = boots>Boots</td>
+        <th id = bootArm> 0 </th>
+    </tr>
+    <tr>
+        <td> Total </td>
+        <th id = total> 0 </th>
+    </tr>
+</table>
+<div style="clear: both"></div>
+
+<table>
+    <tr>
+        <th>Potion</th>
+        <th>Amount</th>
+    </tr>
+    <tr>
+        <td>Large</td>
+        <th id = large> 0 </th>       
+    </tr>
+    <tr>
+        <td>Small</td>
+        <th id = small> 0 </th>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Weapon</th>
+        <th>Damage</th>
+    </tr>
+    <tr>
+        <td id = current> Empty</td>  
+        <th id = curDam> 0 </th>     
+    </tr>
+    <tr>
+        <td id = stored> Empty </td>
+        <th id = storDam> 0 </th>
+    </tr>
+</table>
+
+
+<h2 id= enemyStatsTitle>Enemy Stats</h2>
+    <table id = enemyStats>
+        
+        <tr> 
+            <th> Health </th>
+            <th> Damage </th>
+            <th> Armor </th>    
+        </tr>
+        
+        <tr>
+            <td id = "enHealth"> None </td>
+            <td id = "enDamage"> None </td>
+            <td id = "enArmor"> None </td>
+        </tr>
+
+    </table>
+
+
+</html>
