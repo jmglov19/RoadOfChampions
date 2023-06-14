@@ -61,7 +61,7 @@ function loadEnStats(enemy){
 
 function loadStats(warrior){
 
-    document.getElementById('userstats').innerHTML = warrior.health;
+    document.getElementById('health').innerHTML = warrior.health;
     document.getElementById('helArm').innerHTML = warrior.getHelmetArmor();
     document.getElementById('chestArm').innerHTML = warrior.getChestArmor();
     document.getElementById('legArm').innerHTML = warrior.getLeggingArmor();
