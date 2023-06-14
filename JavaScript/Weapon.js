@@ -2,22 +2,25 @@
 class Weapon {
 	constructor(Type, level) {
 		
+		dmg = Math.floor(Math.random() * 80);
+		dmg.
+		dmg += 35 * level;
 		
 		if(Type == 0) {
-			this.attackDamage = Math.floor(Math.random * 100); //+ (35 * level);
+			this.attackDamage = dmg + 20;
 			this.accuracy = 1;// randomizer.nextDouble() + 0.4 ;	
 			this.SASArmor = 0;
 			this.type = "Bow";
 		}
 		if (Type == 1) {
-			this.attackDamage = Math.floor(Math.random(110 + (35 * level)));
+			this.attackDamage = dmg + 30;
 			this.accuracy = 1; //randomizer.nextDouble() + 0.35;
 			this.SASArmor = Math.floor(Math.random(100));
 			this.type = "SwordAndSheild";
 			
 		}
 		if(Type == 2) {
-			this.attackDamage = Math.floor(Math.random(80 + (35 * level)));
+			this.attackDamage = dmg;
 			this.accuracy = 1;// randomizer.nextDouble() + 0.45;
 			this.SASArmor = 0;
 			this.type = "dualSwords";
