@@ -123,7 +123,7 @@ class Enemy {
 		
 		if(this.enHealth <= 0) {
 			this.enHealth = 0
-			isDefeated(warrior);
+			//isDefeated(warrior);
 			}
 		}			
 	}

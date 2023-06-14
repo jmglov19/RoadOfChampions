@@ -2,8 +2,7 @@
 class Weapon {
 	constructor(Type, level) {
 		
-		dmg = Math.floor(Math.random() * 80);
-		dmg.
+		var dmg = Math.floor(Math.random() * 80);
 		dmg += 35 * level;
 		
 		if(Type == 0) {

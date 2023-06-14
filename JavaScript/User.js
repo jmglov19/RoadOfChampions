@@ -106,60 +106,67 @@ class User {
 		if (Math.random() <= acc) {
 			var enType = enemy.enType;
 			var currentWepType = this.CurrentWeapon.getType();
+			
+			
 			var damage =this.CurrentWeapon.attackDamage;
+			console.log(currentWepType)
+			console.log(enType)
+			console.log(damage)
 			if (currentWepType == "Bow") {
+				console.log("bow")
 				if (enType == "Archer") {
 					damage = damage
 				}
-				if (enType = Bandit) {
+				if (enType == "Bandit") {
 					damage *= 1.5;
 				}
-				if (enType = RougeKnight) {
-					damage  *= 0.5;
+				if (enType == "RogueKnight") {
+					damage *= 0.5				
 				}
-				
 			}
-			if (currentWepType = "SwordAndShield") {
-				if (enType = "Archer") {
+			if (currentWepType == "SwordAndShield") {
+				console.log("SAS")
+				if (enType == "Archer") {
 					damage *= 1.5;
 					
 				}
-				if (enType = "Bandit") {
+				if (enType == "Bandit") {
 					damage *= 0.5;
 					
 				}
-				if (enType = "RougeKnight") {
+				if (enType == "RogueKnight") {
 					damage = damage
 				
 				}
 				
 			}
-			if (currentWepType = "dualSwords") {
-				if (enType = "Archer") {
+			if (currentWepType == "dualSwords") {
+				console.log("dual")
+				if (enType == "Archer") {
 					damage  *= 0.5;
 				}
-				if (enType = "Bandit") {
+				if (enType == "Bandit") {
 					damage = damage
 				}
-				if (enType = "RougeKnight") {
+				if (enType == "RogueKnight") {
 					damage *= 1.5;
 				}
 				
 			}
-			if (currentWepType = "none") {
-				if (enType = "Archer") {
+			if (currentWepType == "none") {
+				if (enType == "Archer") {
 					damage = damage
 				}
-				if (enType = "Bandit") {
+				if (enType == "Bandit") {
 					damage = damage
 				}
-				if (enType = "RougeKnight") {
+				if (enType == "RogueKnight") {
 					damage *= 0.75;
 				}
 				
 			}
-			
-			enemy.takeDamage(damage, this);
+			console.log(damage)
+			enemy.takeDamage(Math.round(damage), this);
 		}	
 }
 	
