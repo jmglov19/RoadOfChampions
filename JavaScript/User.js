@@ -186,7 +186,9 @@ class User {
 				this.health = 1000
 			}
 			this.largePotions -= 1;
+			return true
 		}
+		return false
 			
 	}
 	
@@ -197,7 +199,9 @@ class User {
 				this.health = 1000
 			}
 			this.smallPotions -= 1;
+			return true
 		}
+		return false
 	}
 	
 	equipArmor(foundArmor) {

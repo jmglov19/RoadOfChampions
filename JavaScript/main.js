@@ -8,7 +8,7 @@ function showAlert() {
 }
 
 function newEnemy() {
-    enemy = new Enemy(0, false); 
+    enemy = new Enemy(4, true); 
     document.getElementById('enemyStatsTitle').innerHTML = enemy.enName; 
     document.getElementById('enHealth').innerHTML = enemy.enHealth; 
     document.getElementById('enDamage').innerHTML = enemy.damage;
@@ -17,17 +17,32 @@ function newEnemy() {
 
 function createUser(){
     warrior = new User(1000);
+    var health = document.getElementById("health");
+    health.value = warrior.health;
     loadStats(warrior);
 }
 
 function useLargePotion(){
-    warrior.useLargePotion();
+    var potLargeUse = warrior.useLargePotion();
+    if (potLargeUse){
+    health.value += 450
+    if(health.value > 1000){
+        health.value = 1000
+    }
     loadStats(warrior)
+    }
 }
 
 function useSmallPotion(){
-    warrior.useSmallPotion();
+    var potSmallUse = warrior.useSmallPotion();
+    if (potSmallUse){
+
+    health.value += 150
+    if(health.value > 1000){
+        health.value = 1000
+    }
     loadStats(warrior);
+    }
 }
 
 function switchWeapons(){
@@ -36,7 +51,9 @@ function switchWeapons(){
 }
 
 function takeDamage(){
-    warrior.takeDamage(enemy.damage);
+    
+    warrior.takeDamage(enemy.damage);   
+    health.value -= enemy.damage; //Or whatever you want to do with it.
     loadStats(warrior);
 }
 
@@ -61,6 +78,8 @@ function loadEnStats(enemy){
 
 function loadStats(warrior){
 
+    
+    
     document.getElementById('health').innerHTML = warrior.health;
     document.getElementById('helArm').innerHTML = warrior.getHelmetArmor();
     document.getElementById('chestArm').innerHTML = warrior.getChestArmor();
