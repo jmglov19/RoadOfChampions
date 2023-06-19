@@ -8,16 +8,18 @@ function showAlert() {
 }
 
 function newEnemy() {
-    enemy = new Enemy(4, true); 
+    enemy = new Enemy(3, false); 
     document.getElementById('enemyStatsTitle').innerHTML = enemy.enName; 
     document.getElementById('enHealth').innerHTML = enemy.enHealth; 
     document.getElementById('enDamage').innerHTML = enemy.damage;
     document.getElementById('enArmor').innerHTML = enemy.enArmor;
+    document.getElementById('enmesg').innerHTML = "New " + enemy.enName + " found!"
 }
 
 function createUser(){
     warrior = new User(1000);
     var health = document.getElementById("health");
+    document.getElementById('usmesg').innerHTML = "New warrior has enterned the path"
     health.value = warrior.health;
     loadStats(warrior);
 }
@@ -29,7 +31,12 @@ function useLargePotion(){
     if(health.value > 1000){
         health.value = 1000
     }
+    document.getElementById('usmesg').innerHTML = "Large potion used"
+    runGame(warrior, enemy)
     loadStats(warrior)
+    }
+    else{
+        document.getElementById('usmesg').innerHTML = "You don't have any large potions left"
     }
 }
 
@@ -41,24 +48,40 @@ function useSmallPotion(){
     if(health.value > 1000){
         health.value = 1000
     }
+    document.getElementById('usmesg').innerHTML = "Small potion used"
+    runGame(warrior, enemy)
     loadStats(warrior);
+    }
+    else{
+    document.getElementById('usmesg').innerHTML = "You don't have any small potions left"
     }
 }
 
 function switchWeapons(){
     warrior.switchWeapons();
+    document.getElementById('usmesg').innerHTML = "weapons were swapped"
+    runGame(warrior, enemy)
     loadStats(warrior);
 }
 
 function takeDamage(){
     
-    warrior.takeDamage(enemy.damage);   
-    health.value -= enemy.damage; //Or whatever you want to do with it.
+    var dmg = warrior.takeDamage(enemy.damage);   
+    health.value -= dmg 
+    if (dmg > 0){
+        document.getElementById('enmesg').innerHTML = enemy.enName + " hit you for " + dmg
+    }
+    else{
+        document.getElementById('enmesg').innerHTML = enemy.enName + " had no effect"
+
+    }
     loadStats(warrior);
 }
 
 function attack(){
-    warrior.attack(enemy);
+    var attdmg = warrior.attack(enemy);
+    document.getElementById('usmesg').innerHTML = "You hit for " + attdmg
+    runGame(warrior, enemy)
     loadEnStats(enemy)
 }
 
@@ -76,10 +99,15 @@ function loadEnStats(enemy){
     document.getElementById('enArmor').innerHTML = enemy.enArmor;
 }
 
+function runGame(warrior, enemy){
+    takeDamage();
+
+}
+
+
+
 function loadStats(warrior){
 
-    
-    
     document.getElementById('health').innerHTML = warrior.health;
     document.getElementById('helArm').innerHTML = warrior.getHelmetArmor();
     document.getElementById('chestArm').innerHTML = warrior.getChestArmor();

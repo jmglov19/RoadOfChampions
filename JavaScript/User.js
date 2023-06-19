@@ -93,7 +93,7 @@ class User {
 				this.isAlive = false;
 			}
 		} 
-			
+		return damageTaken	
 	}
 			
 	
@@ -166,8 +166,9 @@ class User {
 				
 			}
 			console.log(damage)
-			enemy.takeDamage(Math.round(damage), this);
-		}	
+			var dmgDealt = enemy.takeDamage(Math.round(damage), this);
+		}
+		return dmgDealt	
 }
 	
 	deafetedEnemiesCounter(enemy) {

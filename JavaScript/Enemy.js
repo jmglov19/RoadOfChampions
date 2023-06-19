@@ -125,7 +125,13 @@ class Enemy {
 			this.enHealth = 0
 			//isDefeated(warrior);
 			}
-		}			
+		}
+		if (damageTaken <= 0) {
+			return 0
+		}
+		else{
+			return damageTaken	
+		}		
 	}
 	
 	
