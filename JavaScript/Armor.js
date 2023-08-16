@@ -3,7 +3,7 @@ class Armor {
 		
 	constructor(type, level) {
 		
-		if (type == 0 ){
+		if (type == 0){
 			this.armorRating = Math.floor(Math.random() * 40) + (15 * level);
 			this.type = "Helmet";
 		}

@@ -2,13 +2,29 @@
 
 var warrior = new User(0);
 var enemy = new Enemy(0, false);
+var response = null
+var level = 0
+var victories = 0
+var boss =  false
 
 function showAlert() {
     alert("Alert from JS file");
 }
 
-function newEnemy() {
-    enemy = new Enemy(3, false); 
+function yes(){
+    response = yes
+}
+
+function no(){
+    response = no
+}
+
+function newEnemy(level, boss) {
+    if (victories % 10 == 0 && victories > 0){
+        boss = true
+    }
+    enemy = new Enemy(level, boss); 
+
     document.getElementById('enemyStatsTitle').innerHTML = enemy.enName; 
     document.getElementById('enHealth').innerHTML = enemy.enHealth; 
     document.getElementById('enDamage').innerHTML = enemy.damage;
@@ -20,6 +36,8 @@ function createUser(){
     warrior = new User(1000);
     var health = document.getElementById("health");
     document.getElementById('usmesg').innerHTML = "New warrior has enterned the path"
+    level = 0
+    victories = 0
     health.value = warrior.health;
     loadStats(warrior);
 }
@@ -85,11 +103,23 @@ function attack(){
     loadEnStats(enemy)
 }
 
-function newWeapon(){
+/*function newWeapon(){
     var ranGen = Math.floor(Math.random() * 3);
     var genWeapon = new Weapon(ranGen, 0);
     warrior.CurrentWeapon = genWeapon;
     loadStats(warrior)
+}
+*/
+function newWeapon(){
+    var ranGen = Math.floor(Math.random() * 3);
+    var genWeapon = new Weapon(ranGen, level);
+    return genWeapon
+}
+
+function newArmor(){
+    var ranGen = Math.floor(Math.random() * 4)
+    var genArmor = new Armor(ranGen, level)
+    return genArmor
 }
 
 function loadEnStats(enemy){
@@ -100,10 +130,69 @@ function loadEnStats(enemy){
 }
 
 function runGame(warrior, enemy){
+    console.log("attack1")
+    if (enemy.enHealth <= 0){
+        victories += 1
+        console.log("Dead")
+        document.getElementById('usmesg').innerHTML = "You defeated " + enemy.enName
+        var ranGen = Math.floor(Math.random() * 2)
+        console.log(ranGen)
+        if (ranGen == 0){
+            droppedWeapon = newWeapon()
+            document.getElementById('usmesg').innerHTML = "You found a " + droppedWeapon.type + " with " + droppedWeapon.attackDamage
+            //if (response == yes){
+                warrior.CurrentWeapon = droppedWeapon
+            //
+            
+            
+
+        }
+        if (ranGen == 1){
+            foundArmor = newArmor()
+            document.getElementById('usmesg').innerHTML = "You found a " + foundArmor.type + " with " + foundArmor.armorRating
+            
+            //warrior.equiptedArmor[0] = foundArmor
+                if(foundArmor.type == "Helmet") {
+                    warrior.equiptedArmor[0] = foundArmor;
+                }
+                if(foundArmor.type == "Chestplate") {
+                    warrior.equiptedArmor[1] = foundArmor;
+                }
+                if(foundArmor.type == "Leggings") {
+                    warrior.equiptedArmor[2] = foundArmor;
+                }
+                if(foundArmor.type == "Boots") {
+                    warrior.equiptedArmor[3] = foundArmor;
+                }
+            //console.log("equiped Armor" + droppedArmor.type + droppedArmor.armorRating + " : " + warrior.equiptedArmor[droppedArmor.type].armorRating)   
+            
+        }
+        console.log(warrior.getArmor())
+        checklevel()
+        loadStats(warrior)
+        newEnemy(level)
+        
+    }
+    else{
     takeDamage();
+    }
 
 }
 
+function equipArmor(foundArmor) {
+    if(foundArmor.getType().equals("Helmet")) {
+        this.equiptedArmor[0] = foundArmor;
+    }
+    if(foundArmor.getType().equals("Chestplate")) {
+        this.equiptedArmor[1] = foundArmor;
+    }
+    if(foundArmor.getType().equals("Leggings")) {
+        this.equiptedArmor[2] = foundArmor;
+    }
+    if(foundArmor.getType().equals("Boots")) {
+        this.equiptedArmor[3] = foundArmor;
+    }
+}
 
 
 function loadStats(warrior){
@@ -127,3 +216,8 @@ function loadStats(warrior){
 
 }
 
+function checklevel(){
+    level = Math.floor(victories / 5)
+    
+    console.log("Level" + level + boss)
+}

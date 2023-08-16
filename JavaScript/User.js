@@ -7,7 +7,7 @@ class User {
 		this.bossesDefeated = 0;
 		this.smallPotions = 4;
 		this.largePotions = 1;
-		this.CurrentWeapon = new Weapon(4, 0);
+		this.CurrentWeapon = new Weapon(1, 1);
 		this.StoredWeapon = new Weapon(3, 0);
 		this.isAlive = true;
 		this.equiptedArmor = [];
@@ -97,14 +97,15 @@ class User {
 	}
 			
 	
-
+	
 	
 	attack(enemy) {
 		
 		
 		var acc = this.CurrentWeapon.getAccuracy();
 		if (Math.random() <= acc) {
-			var enType = enemy.enType;
+			var enType = enemy.enType
+			console.log(enType)
 			var currentWepType = this.CurrentWeapon.getType();
 			
 			
