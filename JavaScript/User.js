@@ -92,8 +92,12 @@ class User {
 			if (this.health <= 0) {
 				this.isAlive = false;
 			}
-		} 
-		return damageTaken	
+		}
+		if (damageTaken < 0){
+			return 0
+		}
+		else
+			return damageTaken	
 	}
 			
 	
@@ -166,6 +170,7 @@ class User {
 				}
 				
 			}
+			damage = damage * (Math.random() +0.5)
 			console.log(damage)
 			var dmgDealt = enemy.takeDamage(Math.round(damage), this);
 		}

@@ -141,7 +141,10 @@ function runGame(warrior, enemy){
             droppedWeapon = newWeapon()
             document.getElementById('usmesg').innerHTML = "You found a " + droppedWeapon.type + " with " + droppedWeapon.attackDamage
             //if (response == yes){
-                warrior.CurrentWeapon = droppedWeapon
+                if (warrior.CurrentWeapon.attackDamage < droppedWeapon.attackDamage){
+                    console.log("swapped")
+                    warrior.CurrentWeapon = droppedWeapon
+                }
             //
             
             
@@ -218,6 +221,6 @@ function loadStats(warrior){
 
 function checklevel(){
     level = Math.floor(victories / 5)
-    
+    document.getElementById('level').innerHTML = level
     console.log("Level" + level + boss)
 }
