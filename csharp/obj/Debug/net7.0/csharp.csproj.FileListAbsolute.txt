@@ -1,0 +1,14 @@
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/bin/Debug/net7.0/csharp
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/bin/Debug/net7.0/csharp.deps.json
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/bin/Debug/net7.0/csharp.runtimeconfig.json
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/bin/Debug/net7.0/csharp.dll
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/bin/Debug/net7.0/csharp.pdb
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.AssemblyInfoInputs.cache
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.AssemblyInfo.cs
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.csproj.CoreCompileInputs.cache
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.dll
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/refint/csharp.dll
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.pdb
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/csharp.genruntimeconfig.cache
+/Users/jmglov/Documents/GitHub/RoadOfChampions/csharp/obj/Debug/net7.0/ref/csharp.dll
