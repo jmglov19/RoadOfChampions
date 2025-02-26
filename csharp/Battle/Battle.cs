@@ -43,7 +43,14 @@ class Battle{
                         Attacker.Toughness += (int)Math.Round(Attacker.Toughness * attr.StatBuff);
                         Console.WriteLine($"{Attacker.Name} raised his toughness to {Attacker.Toughness}");
                     }
+                    if (attr.Type == "Health"){
+                        Attacker.Health += (int)attr.StatBuff;
+                        Attacker.HealthPotion -= 1;
+                        if(Attacker.Health > Attacker.MaxHealth) Attacker.Health = Attacker.MaxHealth;
+                        Console.WriteLine($"{Attacker.Name} used a potion to raise his HP to {Attacker.Health}");
+                    }
                 }
+                
             }
 
         }
@@ -91,7 +98,7 @@ class Battle{
         }
 
 
-        Console.WriteLine($"{Character1.Name}: {Character1.Health} {Character2.Name}: {Character2.Health}");
+        Console.WriteLine($"{Character1.Name} {Character1.Control}: {Character1.Health} {Character2.Name} {Character2.Control}: {Character2.Health}");
     }
 
     
