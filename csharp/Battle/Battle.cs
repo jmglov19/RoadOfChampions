@@ -40,8 +40,8 @@ class Battle{
             foreach (var attr in move.Attributes){
                 if (attr.Name.StartsWith("Raise")){
                     if (attr.Type == "Defense"){
-                        Attacker.Toughness += (int)Math.Round(Attacker.Toughness * attr.StatBuff);
-                        Console.WriteLine($"{Attacker.Name} raised his toughness to {Attacker.Toughness}");
+                        Attacker.ToughnessBoost += (int)Math.Round(Attacker.Toughness * attr.StatBuff, 0);
+                        Console.WriteLine($"{Attacker.Name} raised his toughness to {Attacker.GetDefense()}");
                     }
                     if (attr.Type == "Health"){
                         Attacker.Health += (int)attr.StatBuff;
@@ -54,7 +54,9 @@ class Battle{
             }
 
         }
-        
+        if (!Attacker.CheckStats() || !Defender.CheckStats()){
+            throw new Exception("Stat Error");
+        }
 
         return (Attacker, Defender);
     }
@@ -97,8 +99,14 @@ class Battle{
             }
         }
 
-
-        Console.WriteLine($"{Character1.Name} {Character1.Control}: {Character1.Health} {Character2.Name} {Character2.Control}: {Character2.Health}");
+        if (Character1.Health < 0) {
+            Character2.AddExp(Character1.Level.Num * 5);
+        }
+        else if (Character2.Health < 0){
+            Character1.AddExp(Character2.Level.Num * 10);
+            Console.WriteLine($"You won and gained {Character2.Level.Num * 10} exp");
+        }
+        //Console.WriteLine($"{Character1.Name} {Character1.Control}: {Character1.Health} {Character2.Name} {Character2.Control}: {Character2.Health}");
     }
 
     

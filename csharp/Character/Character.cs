@@ -1,19 +1,21 @@
 namespace csharp;
-class Character 
+class Character
 {
     public string Control;
     public string Name;
+    public Level Level;
     public int MaxHealth;
     public int Health;
     public int Attack;
     public int Toughness;
+    public int ToughnessBoost;
     public int MagicalAttack;
     public int MagicalToughness;
     public int Speed;
     public int HealthPotion;
     public List<Move> DefaultMoves;
     public Weapon HeldWeapon;
-    
+
     public Armor[] Clothing = new Armor[4];
 
     List<string> warriorNames = new List<string>
@@ -32,28 +34,33 @@ class Character
             "Jaxar", "Korrin", "Leron", "Marekson", "Naldor", "Ostun", "Prynn", "Roran", "Syrak", "Thrain",
             "Ulkas", "Vorin", "Wulfer", "Xarrak", "Yamir", "Zarron"
         };
-    public Character(string control){
+    public Character(string control, int level)
+    {
         Random rnd = new Random();
         Name = warriorNames[rnd.Next(0, 101)];
-        Health = 50;
+        Level = new();
+        Level.Num = level;
+        Level.MaxExp = (int)Math.Ceiling(Level.Num * 1.5 * 10);
+        Health = 75;
         MaxHealth = Health;
-        Attack = rnd.Next(1, 5);
-        Toughness = rnd.Next(1, 5);
-        MagicalAttack = rnd.Next(1,5);
-        MagicalToughness = rnd.Next(1,5);
-        Speed = rnd.Next(1,5);
+        Attack = (int)Math.Round((double)(rnd.Next(10, 15) * level * 0.5), 0);
+        Toughness = (int)Math.Round((double)(rnd.Next(1, 5) * level * 0.5), 0);
+        ToughnessBoost = 0;
+        MagicalAttack = (int)Math.Round((double)(rnd.Next(1, 5) * level * 0.5), 0);
+        MagicalToughness = (int)Math.Round((double)(rnd.Next(1, 5) * level * 0.5), 0);
+        Speed = (int)Math.Round((double)(rnd.Next(1, 5) * level * 0.5), 0);
         Control = control;
         HealthPotion = 2;
         DefaultMoves = [new Move()
             {
-                Name="Use Health Potion", 
-                BaseAttack = -10000, 
-                Accuracy= 1.0, 
-                Attributes = new Attribute[]{ 
+                Name="Use Health Potion",
+                BaseAttack = -10000,
+                Accuracy= 1.0,
+                Attributes = new Attribute[]{
                     new(){Name = "Raise Health", Type = "Health", StatBuff = 20,}
                                              }
             }
-        
+
         ];
 
         Clothing[0] = new Helmet();
@@ -63,59 +70,66 @@ class Character
 
 
 
-        HeldWeapon = new Weapon(){
+        HeldWeapon = new Weapon()
+        {
             Name = "Rusty Sword",
-            Attack = rnd.Next(7,30),
-            Speed = rnd.Next(1,11),
+            Attack = rnd.Next(7, 30),
+            Speed = rnd.Next(1, 11),
             Type = 0,
-            Moves = new Move[4] { new Move(){Name="Slash",
-                BaseAttack=8,
-                BaseSpeed=5,
-                Accuracy= 0.5,}, 
+            Moves = new Move[4] {
+                new Move(){
+                    Name="Slash",
+                    BaseAttack=9,
+                    BaseSpeed=5,
+                    Accuracy= 0.80,},
                 new Move(){
                     Name = "Stab",
-                    BaseAttack = 12,
+                    BaseAttack = 15,
                     BaseSpeed = 3,
-                    Accuracy = 0.4,
+                    Accuracy = 0.5,
                 }, new Move(){
                     Name = "Sweep",
-                    BaseAttack = 3,
+                    BaseAttack = 5,
                     BaseSpeed = 3,
-                    Accuracy = 0.9,
+                    Accuracy = 0.97,
                 }, new Move(){
                     Name = "Block",
-                    BaseAttack = -10000,
+                    BaseAttack = 0,
                     Accuracy = 1.0,
                     Attributes = new Attribute[]{ new(){
                             Name = "Raise Defense",
                             Type = "Defense",
                             StatBuff = 0.2,
-                        }                        
+                        }
                     }
-                } 
+                }
             },
         };
 
     }
 
-    
-    public int GetDefense(){
+
+    public int GetDefense()
+    {
         int defense = 0;
-        foreach(var i in Clothing){
+        foreach (var i in Clothing)
+        {
             defense += i.Rating;
         }
-        defense += Toughness;
+        defense += Toughness + ToughnessBoost;
 
-        defense = (int)Math.Ceiling(defense * (Toughness * 0.5));
+        //defense = (int)Math.Ceiling(defense * (Toughness * 0.5));
 
         return defense;
 
 
     }
 
-    public int GetWeight(){
+    public int GetWeight()
+    {
         int weight = 0;
-        foreach (var i in Clothing){
+        foreach (var i in Clothing)
+        {
             weight += i.Weight;
         }
         return weight;
@@ -134,7 +148,8 @@ class Character
         return magicalDefense;
     }
 
-    public int GetSpeed(Move move){
+    public int GetSpeed(Move move)
+    {
         int speed = 0;
         speed = Speed - GetWeight() + HeldWeapon.Speed + move.BaseSpeed * 2;
 
@@ -142,13 +157,16 @@ class Character
         return speed;
     }
 
-    public List<Move> GetMoves(){
+    public List<Move> GetMoves()
+    {
         List<Move> moves = [];
 
-        foreach(var move in HeldWeapon.Moves){
+        foreach (var move in HeldWeapon.Moves)
+        {
             moves.Add(move);
         }
-        foreach(var move in DefaultMoves){
+        foreach (var move in DefaultMoves)
+        {
             moves.Add(move);
         }
 
@@ -157,61 +175,107 @@ class Character
         return moves;
     }
 
-    public Move ChooseMove(){
+    public void IncreaseStats()
+    {
+        Random rnd = new Random();
+        MaxHealth += 2;
+        Attack += rnd.Next(1, 4);
+        Toughness += rnd.Next(1, 4);
+        MagicalAttack += rnd.Next(1, 4);
+        MagicalToughness += rnd.Next(1, 4);
+        Speed += rnd.Next(1, 4);
+    }
 
-        if(Control == "cpu"){
+    public Move ChooseMove()
+    {
+
+        if (Control == "cpu")
+        {
             Random rnd = new();
-        var choice = rnd.Next(0, 4);
+            var choice = rnd.Next(0, 4);
 
-        return HeldWeapon.Moves[choice];
+            return HeldWeapon.Moves[choice];
         }
-        else{
+        else
+        {
             int ch = 0;
             bool move_on = false;
             var moves = GetMoves();
-            
-            while(!move_on){
-                 Console.WriteLine("Choose a Move");
-                 
-                for (int i  = 0; i < moves.Count ; i++){
+
+            while (!move_on)
+            {
+                Console.WriteLine("Choose a Move");
+
+                for (int i = 0; i < moves.Count; i++)
+                {
                     Console.WriteLine($"{i}: {moves[i].Name}");
                 }
-            
+
                 var choice = Console.ReadLine();
 
-                if(choice == "?"){
+                if (choice == "?")
+                {
                     PrintReport();
                 }
-                if(choice == "?f"){
+                if (choice == "?f")
+                {
                     PrintStatSheet();
                 }
-                else if(choice != "?" && choice != "?f"){
-                    try{
+                else if (choice != "?" && choice != "?f")
+                {
+                    try
+                    {
                         ch = Convert.ToInt32(choice);
                         move_on = true;
                     }
-                    catch{
+                    catch
+                    {
                         Console.WriteLine("Value was not a valid move");
                     }
-                    
+
                 }
 
-                
+
 
             }
-           
+
             return moves[ch];
         }
     }
-
-    public int GetDamage(Move move){
-
-        return HeldWeapon.Attack + move.BaseAttack * 2;;
+    public bool CheckStats(){
+        if (MaxHealth + Attack + Toughness + MagicalAttack + MagicalToughness + Speed >  10000 || MaxHealth + Attack + Toughness + MagicalAttack + MagicalToughness + Speed < 0){
+            return false;
+        }
+        return true;
     }
 
+    public int GetDamage(Move move)
+    {
 
-    
-    public void PrintReport(){
+        return (int)Math.Round(HeldWeapon.Attack * move.BaseAttack * 0.2); 
+    }
+
+    public void AddExp(int exp)
+    {
+        Level.Exp += exp;
+        if (Level.Exp >= Level.MaxExp)
+        {
+            Level.Num += (int)Math.Floor((double)Level.Exp / Level.MaxExp);
+            Level.Exp = Level.Exp % Level.MaxExp;
+            Level.MaxExp = (int)Math.Ceiling(Level.Num * 1.5 * 10);
+            LevelUp();
+        }
+
+    }
+
+    public void LevelUp()
+    {
+        Console.WriteLine("Level Up!");
+        this.IncreaseStats();
+    }
+
+    public void PrintReport()
+    {
         Console.WriteLine($"Name: {Name}");
         Console.WriteLine($"HP: {Health}");
         Console.WriteLine($"Attack Skill: {Attack}");
@@ -221,7 +285,8 @@ class Character
         Console.WriteLine($"Speed: {Speed}");
     }
 
-    public void PrintStatSheet(){
+    public void PrintStatSheet()
+    {
         Console.WriteLine($"Name: {Name}");
         Console.WriteLine($"HP: {Health}");
         Console.WriteLine($"Attack Skill: {Attack}");
