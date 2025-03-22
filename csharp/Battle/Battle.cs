@@ -15,7 +15,7 @@ class Battle{
 
     public (Character, Character) Attack(Character Attacker, Move move, Character Defender) {
         Random acc = new();
-        if (move.Accuracy > acc.NextDouble())
+        if (move.Accuracy >= acc.NextDouble())
         {
             
 
